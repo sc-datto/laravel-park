@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+
+  localtunnel:
+    image: node:16-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    command: >
+      sh -c "npm install -g localtunnel &&
+             lt --local-host 1_rest_api_and_marketplace_front --port 8000 --subdomain meishiryohin-dev-2025"
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: meishiryohin
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8999:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+      UPLOAD_LIMIT: 4000M
+    depends_on:
+      - db
+
+volumes:
+  db_data:
