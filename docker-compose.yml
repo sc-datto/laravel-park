@@ -6,6 +6,9 @@ services:
     ports:
       - "8000:8000"
       - "3000:3000"
+    volumes:
+      - vendor:/var/www/html/vendor
+      - node_modules:/var/www/html/node_modules
 
   localtunnel:
     image: node:16-alpine
@@ -39,3 +42,5 @@ services:
 
 volumes:
   db_data:
+  vendor:
+  node_modules:

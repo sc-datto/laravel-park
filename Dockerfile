@@ -40,6 +40,3 @@ RUN chmod -R 775 storage bootstrap/cache && chown -R www-data:www-data storage b
 
 # Exponer puertos para Laravel y Vite
 EXPOSE 8000 3000
-
-# Comando para iniciar Laravel y Vite
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=8000 & npm run dev & php artisan queue:work"]
