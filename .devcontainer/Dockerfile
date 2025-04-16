@@ -7,7 +7,7 @@ RUN apk --no-cache add \
     git \
     libpng-dev \
     libjpeg-turbo-dev \
-    libfreetype6-dev \
+    freetype-dev \
     libzip-dev \
     oniguruma-dev \
     libxml2-dev \
@@ -24,7 +24,7 @@ WORKDIR /var/www
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy project
-COPY .. .
+COPY . .
 
 # Set up permissions for Laravel
 RUN chown -R www-data:www-data /var/www
@@ -32,4 +32,3 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Expose necessary ports
 EXPOSE 8000
-

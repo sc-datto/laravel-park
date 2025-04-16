@@ -1,7 +1,7 @@
 {
   "name": "Laravel + Vue.js Development Environment",
   "dockerFile": "./Dockerfile",
-  "context": ".",
+  "context": "..",
   "forwardPorts": [8000],
   "customizations": {
     "vscode": {
