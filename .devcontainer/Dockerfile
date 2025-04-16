@@ -23,14 +23,8 @@ WORKDIR /var/www
 # Copy the Composer installation script
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Composer dependencies for Laravel
-COPY . .
-
-# Install Composer dependencies
-RUN composer install --optimize-autoloader --no-dev
-
-# Install Node.js dependencies (for Vue.js)
-RUN npm install
+# Copy project
+COPY .. .
 
 # Set up permissions for Laravel
 RUN chown -R www-data:www-data /var/www
@@ -38,7 +32,4 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Expose necessary ports
 EXPOSE 8000
-
-# Set the command to start the PHP server for Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
 

@@ -21,7 +21,8 @@
       ]
     }
   },
-  "postCreateCommand": "composer install && npm install",
-  "remoteUser": "www-data",
+  // "postCreateCommand": "composer install --optimize-autoloader && npm install",
+  // "remoteUser": "www-data",
+  "workspaceMount": "source=root,target=/var/www,type=volume",
   "workspaceFolder": "/var/www"
 }
